@@ -87,10 +87,10 @@ export default function App() {
         <div className="page-heading"><div><span className="eyebrow">{new Intl.DateTimeFormat("ru-RU", { weekday: "long", day: "numeric", month: "long" }).format(new Date()).toLocaleUpperCase("ru-RU")}</span><h1>Доброе утро, Анна <span>✳</span></h1><p>Вот что происходит в вашей студии сегодня.</p></div><button className="primary-button" onClick={() => setModal(true)}><Plus size={17} /> Новая запись</button></div>
         {error && <div className="error-banner" role="alert">{error}<button onClick={() => void load()}>Повторить</button></div>}
         <section className="stats-grid" aria-label="Ключевые показатели">
-          <Stat title="Записи сегодня" value={String(summary.today_total).padStart(2, "0")} hint="В расписании на сегодня" icon={<CalendarDays size={18} />} tone="lilac" trend="+12%" />
-          <Stat title="Ждут подтверждения" value={String(summary.needs_confirmation).padStart(2, "0")} hint="Нужно ответить клиентам" icon={<Clock3 size={18} />} tone="peach" trend="Требует внимания" />
-          <Stat title="Завершено за месяц" value={String(summary.completed_this_month).padStart(2, "0")} hint="Услуг оказано" icon={<Check size={18} />} tone="mint" trend="+8,4%" />
-          <Stat title="Выручка за месяц" value={Number(summary.revenue_this_month).toLocaleString("ru-RU") + " ₽"} hint="По завершённым записям" icon={<ArrowUpRight size={18} />} tone="blue" trend="+4,7%" />
+          <Stat title="Записи сегодня" value={String(summary.today_total).padStart(2, "0")} hint="В расписании на сегодня" icon={<CalendarDays size={18} />} tone="lilac" />
+          <Stat title="Ждут подтверждения" value={String(summary.needs_confirmation).padStart(2, "0")} hint="Нужно ответить клиентам" icon={<Clock3 size={18} />} tone="peach" />
+          <Stat title="Завершено за месяц" value={String(summary.completed_this_month).padStart(2, "0")} hint="Услуг оказано" icon={<Check size={18} />} tone="mint" />
+          <Stat title="Выручка за месяц" value={Number(summary.revenue_this_month).toLocaleString("ru-RU") + " ₽"} hint="По завершённым записям" icon={<ArrowUpRight size={18} />} tone="blue" />
         </section>
         <div className="dashboard-grid">
           <section className="panel appointments-panel">
@@ -117,8 +117,8 @@ export default function App() {
   </div>;
 }
 
-function Stat({ title, value, hint, icon, tone, trend }: { title: string; value: string; hint: string; icon: ReactNode; tone: string; trend: string }) {
-  return <article className="stat-card"><div className="stat-top"><span>{title}</span><span className={"stat-icon " + tone}>{icon}</span></div><div className="stat-value">{value}</div><div className="stat-bottom"><span>{hint}</span><span className={"stat-trend " + (trend.startsWith("+") ? "positive" : "attention")}>{trend}</span></div></article>;
+function Stat({ title, value, hint, icon, tone }: { title: string; value: string; hint: string; icon: ReactNode; tone: string }) {
+  return <article className="stat-card"><div className="stat-top"><span>{title}</span><span className={"stat-icon " + tone}>{icon}</span></div><div className="stat-value">{value}</div><div className="stat-bottom"><span>{hint}</span></div></article>;
 }
 
 function AppointmentRow({ appointment, onChange }: { appointment: Appointment; onChange: (status: AppointmentStatus) => void }) {
